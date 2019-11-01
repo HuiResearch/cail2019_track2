@@ -148,3 +148,7 @@ CUDA_VISIBLE_DEVICES=1是指定第一块显卡，根据具体情况自己改，
 -----
 1. [TensorFlow code and pre-trained models for BERT](https://github.com/google-research/bert)
 2. [The implementation of focal loss proposed on "Focal Loss for Dense Object Detection" by KM He and support for multi-label dataset.](https://github.com/ailias/Focal-Loss-implement-on-Tensorflow)
+
+**感谢**
+-----
+感谢队友牧笛的帮助
