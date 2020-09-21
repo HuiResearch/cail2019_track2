@@ -1,6 +1,7 @@
 # cail2019_track2
 中国法研杯CAIL2019要素抽取任务第三名方案分享
 ====
+欢迎大家使用[tensorflow1.14的bert小工具](https://github.com/huanghuidmml/textToy)
 （修改了一下readme，之前那一版感觉写的太水了。）
 
 这次比赛和前两名差距很大，但是也在此给大家分享一下我所用的方案。
