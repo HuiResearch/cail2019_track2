@@ -168,6 +168,19 @@ class SquadExample(object):
                start_position=None,
                end_position=None,
                is_impossible=False):
+      """
+      Initialize a question.
+
+      Args:
+          self: (todo): write your description
+          qas_id: (str): write your description
+          question_text: (str): write your description
+          doc_tokens: (str): write your description
+          orig_answer_text: (str): write your description
+          start_position: (int): write your description
+          end_position: (int): write your description
+          is_impossible: (bool): write your description
+      """
     self.qas_id = qas_id
     self.question_text = question_text
     self.doc_tokens = doc_tokens
@@ -177,9 +190,21 @@ class SquadExample(object):
     self.is_impossible = is_impossible
 
   def __str__(self):
+      """
+      Return a string representation of this object.
+
+      Args:
+          self: (todo): write your description
+      """
     return self.__repr__()
 
   def __repr__(self):
+      """
+      Return a repr representation of the docstrings.
+
+      Args:
+          self: (todo): write your description
+      """
     s = ""
     s += "qas_id: %s" % (tokenization.printable_text(self.qas_id))
     s += ", question_text: %s" % (
@@ -210,6 +235,24 @@ class InputFeatures(object):
                start_position=None,
                end_position=None,
                is_impossible=None):
+      """
+      Initialize tokenizer.
+
+      Args:
+          self: (todo): write your description
+          unique_id: (str): write your description
+          example_index: (int): write your description
+          doc_span_index: (int): write your description
+          tokens: (int): write your description
+          token_to_orig_map: (str): write your description
+          token_is_max_context: (int): write your description
+          input_ids: (str): write your description
+          input_mask: (todo): write your description
+          segment_ids: (str): write your description
+          start_position: (int): write your description
+          end_position: (int): write your description
+          is_impossible: (bool): write your description
+      """
     self.unique_id = unique_id
     self.example_index = example_index
     self.doc_span_index = doc_span_index
@@ -230,6 +273,12 @@ def read_squad_examples(input_file, is_training):
     input_data = json.load(reader)["data"]
 
   def is_whitespace(c):
+      """
+      Return true if a character is a whitespace.
+
+      Args:
+          c: (todo): write your description
+      """
     if c == " " or c == "\t" or c == "\r" or c == "\n" or ord(c) == 0x202F:
       return True
     return False
@@ -624,6 +673,11 @@ def model_fn_builder(bert_config, init_checkpoint, learning_rate,
       if use_tpu:
 
         def tpu_scaffold():
+            """
+            Returns a tpu.
+
+            Args:
+            """
           tf.train.init_from_checkpoint(init_checkpoint, assignment_map)
           return tf.train.Scaffold()
 
@@ -644,6 +698,13 @@ def model_fn_builder(bert_config, init_checkpoint, learning_rate,
       seq_length = modeling.get_shape_list(input_ids)[1]
 
       def compute_loss(logits, positions):
+          """
+          Compute loss.
+
+          Args:
+              logits: (todo): write your description
+              positions: (todo): write your description
+          """
         one_hot_positions = tf.one_hot(
             positions, depth=seq_length, dtype=tf.float32)
         log_probs = tf.nn.log_softmax(logits, axis=-1)
@@ -953,6 +1014,12 @@ def get_final_text(pred_text, orig_text, do_lower_case):
   # can fail in certain cases in which case we just return `orig_text`.
 
   def _strip_spaces(text):
+      """
+      Strips spaces from a string.
+
+      Args:
+          text: (str): write your description
+      """
     ns_chars = []
     ns_to_s_map = collections.OrderedDict()
     for (i, c) in enumerate(text):
@@ -1059,6 +1126,14 @@ class FeatureWriter(object):
   """Writes InputFeature to TF example file."""
 
   def __init__(self, filename, is_training):
+      """
+      Initialize training.
+
+      Args:
+          self: (todo): write your description
+          filename: (str): write your description
+          is_training: (bool): write your description
+      """
     self.filename = filename
     self.is_training = is_training
     self.num_features = 0
@@ -1069,6 +1144,12 @@ class FeatureWriter(object):
     self.num_features += 1
 
     def create_int_feature(values):
+        """
+        Reads a tensorflow ints from a list of integers.
+
+        Args:
+            values: (todo): write your description
+        """
       feature = tf.train.Feature(
           int64_list=tf.train.Int64List(value=list(values)))
       return feature
@@ -1091,6 +1172,12 @@ class FeatureWriter(object):
     self._writer.write(tf_example.SerializeToString())
 
   def close(self):
+      """
+      Closes the stream.
+
+      Args:
+          self: (todo): write your description
+      """
     self._writer.close()
 
 
@@ -1124,6 +1211,12 @@ def validate_flags_or_throw(bert_config):
 
 
 def main(_):
+    """
+    Main function.
+
+    Args:
+        _: (int): write your description
+    """
   tf.logging.set_verbosity(tf.logging.INFO)
 
   bert_config = modeling.BertConfig.from_json_file(FLAGS.bert_config_file)
@@ -1224,6 +1317,12 @@ def main(_):
     eval_features = []
 
     def append_feature(feature):
+        """
+        Append a feature.
+
+        Args:
+            feature: (todo): write your description
+        """
       eval_features.append(feature)
       eval_writer.process_feature(feature)
 

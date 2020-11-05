@@ -38,6 +38,12 @@ class RCNN():
             self.output = tf.reduce_max(fc, axis=1)
 
     def getLogits(self):
+        """
+        Returns a list of logits
+
+        Args:
+            self: (todo): write your description
+        """
         return self.output
 
 class RCNNATT():
@@ -89,6 +95,12 @@ class RCNNATT():
         self.output = tf.tanh(output)
 
     def getLogits(self):
+        """
+        Returns a list of logits
+
+        Args:
+            self: (todo): write your description
+        """
         return self.output
 
 

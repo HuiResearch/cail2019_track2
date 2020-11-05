@@ -81,6 +81,15 @@ flags.DEFINE_bool(
 class InputExample(object):
 
   def __init__(self, unique_id, text_a, text_b):
+      """
+      Initialize the text
+
+      Args:
+          self: (todo): write your description
+          unique_id: (str): write your description
+          text_a: (str): write your description
+          text_b: (str): write your description
+      """
     self.unique_id = unique_id
     self.text_a = text_a
     self.text_b = text_b
@@ -90,6 +99,17 @@ class InputFeatures(object):
   """A single set of features of data."""
 
   def __init__(self, unique_id, tokens, input_ids, input_mask, input_type_ids):
+      """
+      Initialize the inputs.
+
+      Args:
+          self: (todo): write your description
+          unique_id: (str): write your description
+          tokens: (int): write your description
+          input_ids: (str): write your description
+          input_mask: (todo): write your description
+          input_type_ids: (str): write your description
+      """
     self.unique_id = unique_id
     self.tokens = tokens
     self.input_ids = input_ids
@@ -176,6 +196,11 @@ def model_fn_builder(bert_config, init_checkpoint, layer_indexes, use_tpu,
     if use_tpu:
 
       def tpu_scaffold():
+          """
+          Returns a tpu.
+
+          Args:
+          """
         tf.train.init_from_checkpoint(init_checkpoint, assignment_map)
         return tf.train.Scaffold()
 
@@ -341,6 +366,12 @@ def read_examples(input_file):
 
 
 def main(_):
+    """
+    Main function.
+
+    Args:
+        _: (int): write your description
+    """
   tf.logging.set_verbosity(tf.logging.INFO)
 
   layer_indexes = [int(x) for x in FLAGS.layers.split(",")]

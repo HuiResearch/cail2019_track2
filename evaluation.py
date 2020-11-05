@@ -18,12 +18,26 @@ def readThreshold(fname):
     return dic
 
 def add_(arr1, arr2):
+    """
+    Add duplicated arrays.
+
+    Args:
+        arr1: (array): write your description
+        arr2: (array): write your description
+    """
     for i in range(len(arr1)):
         arr1[i].extend(arr2[i])
         arr1[i] = list(set(arr1[i]))
     return arr1
 
 def re_match(text, feature):
+    """
+    Return the first matching matching feature.
+
+    Args:
+        text: (str): write your description
+        feature: (str): write your description
+    """
     pred = np.zeros(20, dtype=np.int32)
     if feature is None:
         return pred
@@ -40,6 +54,12 @@ def getMatch(feature, sentences, model):
     return re_pre
 
 def load_file(filename):
+    """
+    Loads a list of sentences.
+
+    Args:
+        filename: (str): write your description
+    """
     f = open(filename, "r", encoding='utf-8')
     all_sentence = []
     all_label = []

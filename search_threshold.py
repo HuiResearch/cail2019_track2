@@ -12,6 +12,14 @@ import logging
 logging.basicConfig(level=logging.INFO)
 
 def getLab(probs, id2label, threshold):
+    """
+    Get the labels for each label.
+
+    Args:
+        probs: (todo): write your description
+        id2label: (str): write your description
+        threshold: (float): write your description
+    """
     predict_list = []
     for i in range(len(probs)):
         if probs[i] > threshold[i]:
@@ -19,12 +27,26 @@ def getLab(probs, id2label, threshold):
     return predict_list
 
 def getPreLab(array, id2label, threshold):
+    """
+    Returns the threshold of the label.
+
+    Args:
+        array: (array): write your description
+        id2label: (str): write your description
+        threshold: (float): write your description
+    """
     result = []
     for p in array:
         result.append(getLab(p, id2label, threshold))
     return result
 
 def load_file(filename):
+    """
+    Loads a list of sentences.
+
+    Args:
+        filename: (str): write your description
+    """
     f = open(filename, "r", encoding='utf-8')
     all_sentence = []
     all_label = []

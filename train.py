@@ -169,6 +169,11 @@ flags.DEFINE_integer(
     "param in focal loss")
 
 def getNumClasses():
+    """
+    Returns a list of the label classes.
+
+    Args:
+    """
     tag_path = os.path.join(FLAGS.data_dir, "tags.txt")
     f = open(tag_path, 'r', encoding='utf-8')
     lines = f.readlines()
@@ -221,6 +226,17 @@ class InputFeatures(object):
                  segment_ids,
                  label_id,
                  is_real_example=True):
+        """
+        Initialize the input segment.
+
+        Args:
+            self: (todo): write your description
+            input_ids: (str): write your description
+            input_mask: (todo): write your description
+            segment_ids: (str): write your description
+            label_id: (str): write your description
+            is_real_example: (bool): write your description
+        """
         self.input_ids = input_ids
         self.input_mask = input_mask
         self.segment_ids = segment_ids
@@ -249,6 +265,13 @@ class DataProcessor(object):
 
     @classmethod
     def _read_json(cls, input_file):
+        """
+        Reads a list of sentences from a file.
+
+        Args:
+            cls: (todo): write your description
+            input_file: (str): write your description
+        """
         ##此处的sent格式{"sentence": "被告对家庭不管不问。", "labels": ["DV13"]}
         fin = open(input_file, 'r', encoding='utf-8')
         line = fin.readline()
@@ -431,6 +454,12 @@ def file_based_convert_examples_to_features(
                                          max_seq_length, tokenizer)
 
         def create_int_feature(values):
+            """
+            Create an int int int from a list of integers.
+
+            Args:
+                values: (todo): write your description
+            """
             f = tf.train.Feature(int64_list=tf.train.Int64List(value=list(values)))
             return f
 
@@ -593,6 +622,19 @@ def focal_loss(prediction_tensor, target_tensor, alpha=FLAGS.alpha, gamma=FLAGS.
 
 def create_model(bert_config, is_training, input_ids, input_mask, segment_ids,
                  labels, num_labels, use_one_hot_embeddings):
+    """
+    Create the model.
+
+    Args:
+        bert_config: (todo): write your description
+        is_training: (bool): write your description
+        input_ids: (str): write your description
+        input_mask: (str): write your description
+        segment_ids: (str): write your description
+        labels: (dict): write your description
+        num_labels: (int): write your description
+        use_one_hot_embeddings: (bool): write your description
+    """
     model = modeling.BertModel(
         config=bert_config,
         is_training=is_training,
@@ -667,6 +709,11 @@ def model_fn_builder(bert_config, num_labels, init_checkpoint, learning_rate,
             if use_tpu:
 
                 def tpu_scaffold():
+                    """
+                    Returns a tpu.
+
+                    Args:
+                    """
                     tf.train.init_from_checkpoint(init_checkpoint, assignment_map)
                     return tf.train.Scaffold()
 
@@ -696,9 +743,25 @@ def model_fn_builder(bert_config, num_labels, init_checkpoint, learning_rate,
         elif mode == tf.estimator.ModeKeys.EVAL:
 
             def metric_fn(per_example_loss, label_ids, logits, is_real_example):
+                """
+                Metric function.
+
+                Args:
+                    per_example_loss: (todo): write your description
+                    label_ids: (str): write your description
+                    logits: (todo): write your description
+                    is_real_example: (bool): write your description
+                """
                 predictions = tf.nn.sigmoid(logits)
 
                 def multi_label_hot(predictions, threshold=0.5):
+                    """
+                    Multi - hot label.
+
+                    Args:
+                        predictions: (todo): write your description
+                        threshold: (float): write your description
+                    """
                     predictions = tf.cast(predictions, tf.float32)
                     threshold = float(threshold)
                     return tf.cast(tf.greater(predictions, threshold), tf.int64)
@@ -806,6 +869,12 @@ def convert_examples_to_features(examples, label_list, max_seq_length,
 
 
 def main(_):
+    """
+    Main function.
+
+    Args:
+        _: (int): write your description
+    """
     tf.logging.set_verbosity(tf.logging.INFO)
 
     processors = {

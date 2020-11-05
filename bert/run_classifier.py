@@ -167,6 +167,17 @@ class InputFeatures(object):
                segment_ids,
                label_id,
                is_real_example=True):
+      """
+      Initialize the input segment.
+
+      Args:
+          self: (todo): write your description
+          input_ids: (str): write your description
+          input_mask: (todo): write your description
+          segment_ids: (str): write your description
+          label_id: (str): write your description
+          is_real_example: (bool): write your description
+      """
     self.input_ids = input_ids
     self.input_mask = input_mask
     self.segment_ids = segment_ids
@@ -208,6 +219,12 @@ class XnliProcessor(DataProcessor):
   """Processor for the XNLI data set."""
 
   def __init__(self):
+      """
+      Initialize the language.
+
+      Args:
+          self: (todo): write your description
+      """
     self.language = "zh"
 
   def get_train_examples(self, data_dir):
@@ -490,6 +507,12 @@ def file_based_convert_examples_to_features(
                                      max_seq_length, tokenizer)
 
     def create_int_feature(values):
+        """
+        Create an int int int from a list of integers.
+
+        Args:
+            values: (todo): write your description
+        """
       f = tf.train.Feature(int64_list=tf.train.Int64List(value=list(values)))
       return f
 
@@ -653,6 +676,11 @@ def model_fn_builder(bert_config, num_labels, init_checkpoint, learning_rate,
       if use_tpu:
 
         def tpu_scaffold():
+            """
+            Returns a tpu.
+
+            Args:
+            """
           tf.train.init_from_checkpoint(init_checkpoint, assignment_map)
           return tf.train.Scaffold()
 
@@ -682,6 +710,15 @@ def model_fn_builder(bert_config, num_labels, init_checkpoint, learning_rate,
     elif mode == tf.estimator.ModeKeys.EVAL:
 
       def metric_fn(per_example_loss, label_ids, logits, is_real_example):
+          """
+          Calculate accuracy.
+
+          Args:
+              per_example_loss: (todo): write your description
+              label_ids: (str): write your description
+              logits: (todo): write your description
+              is_real_example: (bool): write your description
+          """
         predictions = tf.argmax(logits, axis=-1, output_type=tf.int32)
         accuracy = tf.metrics.accuracy(
             labels=label_ids, predictions=predictions, weights=is_real_example)
@@ -781,6 +818,12 @@ def convert_examples_to_features(examples, label_list, max_seq_length,
 
 
 def main(_):
+    """
+    Main function.
+
+    Args:
+        _: (int): write your description
+    """
   tf.logging.set_verbosity(tf.logging.INFO)
 
   processors = {

@@ -232,6 +232,12 @@ class BertModel(object):
             kernel_initializer=create_initializer(config.initializer_range))
 
   def get_pooled_output(self):
+      """
+      Get the output of the outputs.
+
+      Args:
+          self: (todo): write your description
+      """
     return self.pooled_output
 
   def get_sequence_output(self):
@@ -244,6 +250,12 @@ class BertModel(object):
     return self.sequence_output
 
   def get_all_encoder_layers(self):
+      """
+      Returns all encoder layers.
+
+      Args:
+          self: (todo): write your description
+      """
     return self.all_encoder_layers
 
   def get_embedding_output(self):
@@ -258,6 +270,12 @@ class BertModel(object):
     return self.embedding_output
 
   def get_embedding_table(self):
+      """
+      Returns the embedding table.
+
+      Args:
+          self: (todo): write your description
+      """
     return self.embedding_table
 
 
@@ -628,6 +646,16 @@ def attention_layer(from_tensor,
 
   def transpose_for_scores(input_tensor, batch_size, num_attention_heads,
                            seq_length, width):
+      """
+      Parameters ---------- input_tensor.
+
+      Args:
+          input_tensor: (todo): write your description
+          batch_size: (int): write your description
+          num_attention_heads: (int): write your description
+          seq_length: (int): write your description
+          width: (int): write your description
+      """
     output_tensor = tf.reshape(
         input_tensor, [batch_size, seq_length, num_attention_heads, width])
 

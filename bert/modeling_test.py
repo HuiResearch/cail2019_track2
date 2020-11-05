@@ -49,6 +49,30 @@ class BertModelTest(tf.test.TestCase):
                  type_vocab_size=16,
                  initializer_range=0.02,
                  scope=None):
+        """
+        Initialize the model.
+
+        Args:
+            self: (todo): write your description
+            parent: (todo): write your description
+            batch_size: (int): write your description
+            seq_length: (int): write your description
+            is_training: (bool): write your description
+            use_input_mask: (bool): write your description
+            use_token_type_ids: (str): write your description
+            vocab_size: (int): write your description
+            hidden_size: (int): write your description
+            num_hidden_layers: (int): write your description
+            num_attention_heads: (int): write your description
+            intermediate_size: (int): write your description
+            hidden_act: (todo): write your description
+            hidden_dropout_prob: (todo): write your description
+            attention_probs_dropout_prob: (todo): write your description
+            max_position_embeddings: (int): write your description
+            type_vocab_size: (int): write your description
+            initializer_range: (todo): write your description
+            scope: (str): write your description
+        """
       self.parent = parent
       self.batch_size = batch_size
       self.seq_length = seq_length
@@ -69,6 +93,12 @@ class BertModelTest(tf.test.TestCase):
       self.scope = scope
 
     def create_model(self):
+        """
+        Creates the model.
+
+        Args:
+            self: (todo): write your description
+        """
       input_ids = BertModelTest.ids_tensor([self.batch_size, self.seq_length],
                                            self.vocab_size)
 
@@ -112,6 +142,13 @@ class BertModelTest(tf.test.TestCase):
       return outputs
 
     def check_output(self, result):
+        """
+        Checks if the result.
+
+        Args:
+            self: (todo): write your description
+            result: (todo): write your description
+        """
       self.parent.assertAllEqual(
           result["embedding_output"].shape,
           [self.batch_size, self.seq_length, self.hidden_size])
@@ -124,15 +161,34 @@ class BertModelTest(tf.test.TestCase):
                                  [self.batch_size, self.hidden_size])
 
   def test_default(self):
+      """
+      Run test test test test.
+
+      Args:
+          self: (todo): write your description
+      """
     self.run_tester(BertModelTest.BertModelTester(self))
 
   def test_config_to_json_string(self):
+      """
+      Serialize config to_string to a json string.
+
+      Args:
+          self: (todo): write your description
+      """
     config = modeling.BertConfig(vocab_size=99, hidden_size=37)
     obj = json.loads(config.to_json_string())
     self.assertEqual(obj["vocab_size"], 99)
     self.assertEqual(obj["hidden_size"], 37)
 
   def run_tester(self, tester):
+      """
+      Runs the network.
+
+      Args:
+          self: (todo): write your description
+          tester: (todo): write your description
+      """
     with self.test_session() as sess:
       ops = tester.create_model()
       init_op = tf.group(tf.global_variables_initializer(),
