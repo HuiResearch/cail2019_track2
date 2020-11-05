@@ -167,6 +167,11 @@ def model_fn_builder(bert_config, init_checkpoint, learning_rate,
       if use_tpu:
 
         def tpu_scaffold():
+            """
+            Returns a tpu.
+
+            Args:
+            """
           tf.train.init_from_checkpoint(init_checkpoint, assignment_map)
           return tf.train.Scaffold()
 
@@ -414,6 +419,12 @@ def _decode_record(record, name_to_features):
 
 
 def main(_):
+    """
+    Main function.
+
+    Args:
+        _: (int): write your description
+    """
   tf.logging.set_verbosity(tf.logging.INFO)
 
   if not FLAGS.do_train and not FLAGS.do_eval:

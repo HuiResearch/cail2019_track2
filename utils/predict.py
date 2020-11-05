@@ -19,6 +19,17 @@ class InputFeatures(object):
                segment_ids,
                label_id,
                is_real_example=True):
+      """
+      Initialize the input segment.
+
+      Args:
+          self: (todo): write your description
+          input_ids: (str): write your description
+          input_mask: (todo): write your description
+          segment_ids: (str): write your description
+          label_id: (str): write your description
+          is_real_example: (bool): write your description
+      """
     self.input_ids = input_ids
     self.input_mask = input_mask
     self.segment_ids = segment_ids
@@ -27,6 +38,15 @@ class InputFeatures(object):
 
 def convert_single_example(sent, label_list, max_seq_length,
                            tokenizer):
+    """
+    Converts a list of sentences into a list of sentences.
+
+    Args:
+        sent: (todo): write your description
+        label_list: (list): write your description
+        max_seq_length: (int): write your description
+        tokenizer: (todo): write your description
+    """
   label_map = {}
   for (i, label) in enumerate(label_list):
     label_map[label] = i
@@ -120,6 +140,13 @@ class BERTModel:
         self.probabilities = self.sess.graph.get_tensor_by_name('pred_prob:0')
 
     def convert(self, line):
+        """
+        Converts a text of a list of a document.
+
+        Args:
+            self: (todo): write your description
+            line: (todo): write your description
+        """
         feature = convert_single_example(line, self.label, self.max_seg_length, self.tokenizer)
         input_ids = feature.input_ids
         input_mask = feature.input_mask
@@ -140,6 +167,13 @@ class BERTModel:
         return all_result
 
     def rematch(self, arrays):
+        """
+        Removes indices of the indices.
+
+        Args:
+            self: (todo): write your description
+            arrays: (array): write your description
+        """
         predict_list = []
         for array in arrays:
             temp = []
@@ -153,6 +187,13 @@ class BERTModel:
     def predict(self, sentences):
         """预测小批量句子"""
         def getPre(arr, id2label):
+            """
+            Get the label for each label.
+
+            Args:
+                arr: (array): write your description
+                id2label: (str): write your description
+            """
             predict_list = []
             for i in range(len(arr)):
                 if arr[i] > self.threshold[i]:
@@ -160,6 +201,13 @@ class BERTModel:
             return predict_list
 
         def getPredictLabel(array, id2label):
+            """
+            Return the label for a label.
+
+            Args:
+                array: (array): write your description
+                id2label: (str): write your description
+            """
             proba = array[0]
             result = []
             for p in proba:
@@ -187,6 +235,13 @@ class BERTModel:
         return result
 
     def getProb(self, sentences):
+        """
+        Returns a list of sentences
+
+        Args:
+            self: (todo): write your description
+            sentences: (todo): write your description
+        """
         input_ids_list = []
         input_mask_list = []
         segment_ids_list = []
@@ -206,6 +261,13 @@ class BERTModel:
         return probabilities_[0]
 
     def getProbs(self, sentences):
+        """
+        Parameters ---------- sentences : list of sentences
+
+        Args:
+            self: (todo): write your description
+            sentences: (todo): write your description
+        """
         step = int(len(sentences) / pre_batch_size)
         all_result = []
         for i in tqdm(range(step)):

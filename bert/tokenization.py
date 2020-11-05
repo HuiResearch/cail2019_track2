@@ -142,10 +142,24 @@ def convert_by_vocab(vocab, items):
 
 
 def convert_tokens_to_ids(vocab, tokens):
+    """
+    Converts a list of tokens to ids.
+
+    Args:
+        vocab: (todo): write your description
+        tokens: (str): write your description
+    """
   return convert_by_vocab(vocab, tokens)
 
 
 def convert_ids_to_tokens(inv_vocab, ids):
+    """
+    Convert ids to ids.
+
+    Args:
+        inv_vocab: (todo): write your description
+        ids: (list): write your description
+    """
   return convert_by_vocab(inv_vocab, ids)
 
 
@@ -162,12 +176,27 @@ class FullTokenizer(object):
   """Runs end-to-end tokenziation."""
 
   def __init__(self, vocab_file, do_lower_case=True):
+      """
+      Initialize the vocabulary from a file.
+
+      Args:
+          self: (todo): write your description
+          vocab_file: (str): write your description
+          do_lower_case: (todo): write your description
+      """
     self.vocab = load_vocab(vocab_file)
     self.inv_vocab = {v: k for k, v in self.vocab.items()}
     self.basic_tokenizer = BasicTokenizer(do_lower_case=do_lower_case)
     self.wordpiece_tokenizer = WordpieceTokenizer(vocab=self.vocab)
 
   def tokenize(self, text):
+      """
+      Tokenize a string.
+
+      Args:
+          self: (todo): write your description
+          text: (str): write your description
+      """
     split_tokens = []
     for token in self.basic_tokenizer.tokenize(text):
       for sub_token in self.wordpiece_tokenizer.tokenize(token):
@@ -176,9 +205,23 @@ class FullTokenizer(object):
     return split_tokens
 
   def convert_tokens_to_ids(self, tokens):
+      """
+      Convert ids to ids.
+
+      Args:
+          self: (todo): write your description
+          tokens: (str): write your description
+      """
     return convert_by_vocab(self.vocab, tokens)
 
   def convert_ids_to_tokens(self, ids):
+      """
+      Convert ids to ids.
+
+      Args:
+          self: (todo): write your description
+          ids: (list): write your description
+      """
     return convert_by_vocab(self.inv_vocab, ids)
 
 
@@ -301,6 +344,15 @@ class WordpieceTokenizer(object):
   """Runs WordPiece tokenziation."""
 
   def __init__(self, vocab, unk_token="[UNK]", max_input_chars_per_word=200):
+      """
+      Initialize the vocabulary.
+
+      Args:
+          self: (todo): write your description
+          vocab: (todo): write your description
+          unk_token: (str): write your description
+          max_input_chars_per_word: (int): write your description
+      """
     self.vocab = vocab
     self.unk_token = unk_token
     self.max_input_chars_per_word = max_input_chars_per_word

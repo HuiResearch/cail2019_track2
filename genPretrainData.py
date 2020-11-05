@@ -1,6 +1,12 @@
 import json
 
 def getSentences(filename):
+    """
+    Returns a list of sentences.
+
+    Args:
+        filename: (str): write your description
+    """
     sentences = []
     with open(filename, "r", encoding="utf-8") as f:
         for line in f:
@@ -13,6 +19,12 @@ def getSentences(filename):
     return sentences
 
 def work(task):
+    """
+    Print the workflows of a workflows.
+
+    Args:
+        task: (float): write your description
+    """
     small = "data/" + task + "/data_small_selected.json"
     large = "data/" + task + "/train_selected.json"
     oufname = "data/" + task + "/pretrain.txt"

@@ -66,6 +66,17 @@ class TrainingInstance(object):
 
   def __init__(self, tokens, segment_ids, masked_lm_positions, masked_lm_labels,
                is_random_next):
+      """
+      Initialize features and set.
+
+      Args:
+          self: (todo): write your description
+          tokens: (int): write your description
+          segment_ids: (str): write your description
+          masked_lm_positions: (todo): write your description
+          masked_lm_labels: (str): write your description
+          is_random_next: (bool): write your description
+      """
     self.tokens = tokens
     self.segment_ids = segment_ids
     self.is_random_next = is_random_next
@@ -73,6 +84,12 @@ class TrainingInstance(object):
     self.masked_lm_labels = masked_lm_labels
 
   def __str__(self):
+      """
+      Generate a string of text.
+
+      Args:
+          self: (todo): write your description
+      """
     s = ""
     s += "tokens: %s\n" % (" ".join(
         [tokenization.printable_text(x) for x in self.tokens]))
@@ -86,6 +103,12 @@ class TrainingInstance(object):
     return s
 
   def __repr__(self):
+      """
+      Return the __repr__.
+
+      Args:
+          self: (todo): write your description
+      """
     return self.__str__()
 
 
@@ -163,11 +186,23 @@ def write_instance_to_example_files(instances, tokenizer, max_seq_length,
 
 
 def create_int_feature(values):
+    """
+    Reads a tensorflow ints from a list of integers.
+
+    Args:
+        values: (todo): write your description
+    """
   feature = tf.train.Feature(int64_list=tf.train.Int64List(value=list(values)))
   return feature
 
 
 def create_float_feature(values):
+    """
+    Creates a tf.
+
+    Args:
+        values: (todo): write your description
+    """
   feature = tf.train.Feature(float_list=tf.train.FloatList(value=list(values)))
   return feature
 
@@ -407,6 +442,12 @@ def truncate_seq_pair(tokens_a, tokens_b, max_num_tokens, rng):
 
 
 def main(_):
+    """
+    Main function.
+
+    Args:
+        _: (int): write your description
+    """
   tf.logging.set_verbosity(tf.logging.INFO)
 
   tokenizer = tokenization.FullTokenizer(

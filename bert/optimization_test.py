@@ -23,6 +23,12 @@ import tensorflow as tf
 class OptimizationTest(tf.test.TestCase):
 
   def test_adam(self):
+      """
+      Perform a tf session.
+
+      Args:
+          self: (todo): write your description
+      """
     with self.test_session() as sess:
       w = tf.get_variable(
           "w",

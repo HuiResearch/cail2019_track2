@@ -118,6 +118,14 @@ def model_fn_builder(num_labels, learning_rate, num_train_steps,
     elif mode == tf.estimator.ModeKeys.EVAL:
 
       def metric_fn(per_example_loss, label_ids, logits):
+          """
+          Calculate the accuracy.
+
+          Args:
+              per_example_loss: (todo): write your description
+              label_ids: (str): write your description
+              logits: (todo): write your description
+          """
         predictions = tf.argmax(logits, axis=-1, output_type=tf.int32)
         accuracy = tf.metrics.accuracy(label_ids, predictions)
         loss = tf.metrics.mean(per_example_loss)
@@ -156,6 +164,12 @@ def create_tokenizer_from_hub_module(bert_hub_module_handle):
 
 
 def main(_):
+    """
+    Main function.
+
+    Args:
+        _: (int): write your description
+    """
   tf.logging.set_verbosity(tf.logging.INFO)
 
   processors = {
