@@ -1,7 +1,7 @@
 # cail2019_track2
 中国法研杯CAIL2019要素抽取任务第三名方案分享
 ====
-欢迎大家使用[tensorflow1.14的bert小工具](https://github.com/huanghuidmml/textToy)
+欢迎大家使用[tensorflow1.x的bert系列模型库，支持单机多卡，梯度累积，自动导出pb部署](https://github.com/huanghuidmml/textToy)
 
 （修改了一下readme，之前那一版感觉写的太水了。）
 
